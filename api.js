@@ -11,53 +11,49 @@ const Http = new XMLHttpRequest();
     Http.addEventListener('load', function(){
   
         var jsonObject = JSON.parse(Http.response);
-        // console.log(jsonObject);
-        // console.log(jsonObject.status);
-        // console.log(jsonObject.data.movies[0].summary);
-        // console.log(jsonObject.data.movies[0].id);
+      
         var id = jsonObject.data.movies[0].id
         jsonObject.data.movies[0].id
         const idURL = `https://yts.lt/api/v2/movie_reviews.json?movie_id=${id}`;
         Http.open("GET" , idURL);
         var jsonObjectDetail = JSON.parse(Http.response);
-        // console.log(jsonObjectDetail);
-        // console.log(jsonObjectDetail.data.movies[0]);
-        // console.log(jsonObjectDetail.data.movies[0]);
 
-        console.log(jsonObjectDetail.data.movies[0].torrents);
         var movieFormat = jsonObjectDetail.data.movies[0].torrents;
         var qualityList = [];
         maxQuality = 0;
 
       movieFormat.forEach(sample => {
+
         var movieQuality = sample.quality;
-        console.log(movieQuality);
         qualityList.push(movieQuality);
-        console.log(maxQuality);
-      
-      console.log(qualityList);
-      slicedArray = [];
-      maxQuality = 0;
-      var torrentObject ={};
-      qualityList.forEach(quality=>{
-        var slicedQuality = quality.slice(0, -1);
-        console.log(slicedQuality);
+        slicedArray = [];
+        maxQuality = 0;
+        var torrentObject ={};
+        qualityList.forEach(quality=>{
+          var slicedQuality = quality.slice(0, -1);
         
         slicedArray.push(slicedQuality);
           if(maxQuality< Number(slicedQuality) ){
             maxQuality = Number(slicedQuality);
             torrentObject = sample;
           }
-          console.log(slicedArray);
-          console.log(maxQuality);
-        
 
-         } );
+         });
         
          console.log(torrentObject);
          console.log(torrentObject.url)
+   
       });
-        
+    
+        const downloadQuery = require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+      downloadQuery.question("Do you want to download the torrent file with maximum quality?", (ans) => {
+        if(ans == "y"){
+          console.log("Download in progress");
+        }});
+    
     });
    
     Http.open("GET" , url);
@@ -66,15 +62,3 @@ const Http = new XMLHttpRequest();
     readline.close()
   })
   
-
-
-// const URL = 'https://yts.lt/api/v2/list_movies.json ?movie_details';
-
-
-// Http.onreadystatechange = (e)=> {
-//     if(Http.readyState === 4 && Http.status=== 200){
-//     var jsonObject = JSON.parse(Http.response);
-//     console.log(jsonObject);
-
-// }}
-
