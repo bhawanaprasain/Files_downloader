@@ -25,11 +25,40 @@ const Http = new XMLHttpRequest();
         // console.log(jsonObjectDetail.data.movies[0]);
 
         console.log(jsonObjectDetail.data.movies[0].torrents);
+        var movieFormat = jsonObjectDetail.data.movies[0].torrents;
+        var qualityList = [];
+        maxQuality = 0;
 
+      movieFormat.forEach(sample => {
+        var movieQuality = sample.quality;
+        if(maxQuality< movieQuality ){
+          maxQuality = movieQuality;
 
+        }
+        console.log(movieQuality);
+qualityList.push(movieQuality);
+        console.log(maxQuality);
+      });
+      console.log(qualityList);
+      slicedArray = [];
+      maxQuality = 0;
+      qualityList.forEach(quality=>{
+        var slicedQuality = quality.slice(0, -1);
+        console.log(slicedQuality);
+        slicedArray.push(slicedQuality);
+          if(maxQuality< Number(slicedQuality) ){
+            maxQuality = Number(slicedQuality);
+
+          }
+         
+
+      });
+      console.log(slicedArray);
+      console.log(maxQuality);
         // console.log(jsonObject.data.movies[0].genres);
         
     });
+   
     Http.open("GET" , url);
 
     Http.send();
