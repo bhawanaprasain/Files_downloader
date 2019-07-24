@@ -31,31 +31,32 @@ const Http = new XMLHttpRequest();
 
       movieFormat.forEach(sample => {
         var movieQuality = sample.quality;
-        if(maxQuality< movieQuality ){
-          maxQuality = movieQuality;
-
-        }
         console.log(movieQuality);
-qualityList.push(movieQuality);
+        qualityList.push(movieQuality);
         console.log(maxQuality);
-      });
+      
       console.log(qualityList);
       slicedArray = [];
       maxQuality = 0;
+      var torrentObject ={};
       qualityList.forEach(quality=>{
         var slicedQuality = quality.slice(0, -1);
         console.log(slicedQuality);
+        
         slicedArray.push(slicedQuality);
           if(maxQuality< Number(slicedQuality) ){
             maxQuality = Number(slicedQuality);
-
+            torrentObject = sample;
           }
-         
+          console.log(slicedArray);
+          console.log(maxQuality);
+        
 
+         } );
+        
+         console.log(torrentObject);
+         console.log(torrentObject.url)
       });
-      console.log(slicedArray);
-      console.log(maxQuality);
-        // console.log(jsonObject.data.movies[0].genres);
         
     });
    
