@@ -11,17 +11,20 @@ const Http = new XMLHttpRequest();
     Http.addEventListener('load', function(){
   
         var jsonObject = JSON.parse(Http.response);
-        console.log(jsonObject);
-        console.log(jsonObject.status);
-        console.log(jsonObject.data.movies[0].summary);
-        console.log(jsonObject.data.movies[0].id);
+        // console.log(jsonObject);
+        // console.log(jsonObject.status);
+        // console.log(jsonObject.data.movies[0].summary);
+        // console.log(jsonObject.data.movies[0].id);
         var id = jsonObject.data.movies[0].id
         jsonObject.data.movies[0].id
         const idURL = `https://yts.lt/api/v2/movie_reviews.json?movie_id=${id}`;
         Http.open("GET" , idURL);
         var jsonObjectDetail = JSON.parse(Http.response);
-        console.log(jsonObjectDetail);
-        console.log(jsonObjectDetail.data.movies[0]);
+        // console.log(jsonObjectDetail);
+        // console.log(jsonObjectDetail.data.movies[0]);
+        // console.log(jsonObjectDetail.data.movies[0]);
+
+        console.log(jsonObjectDetail.data.movies[0].torrents);
 
 
         // console.log(jsonObject.data.movies[0].genres);
